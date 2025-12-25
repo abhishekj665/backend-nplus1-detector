@@ -59,9 +59,16 @@ export const logIn = async (req, res, next) => {
   }
 };
 
-export const logOut = (req, res, next) => {
+export const logOut = async (req, res, next) => {
   try {
     let response = clearCookie(res, "token");
+
+    response = await activityLogsService.createActivityLogsService({
+      userId: req.user.id,
+      actionType: "LOGOUT",
+      result: "SUCCESS",
+      message: "User Successfully LogOut",
+    });
 
     if (response.success) {
       return successResponse(

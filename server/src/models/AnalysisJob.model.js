@@ -22,7 +22,14 @@ const AnalysisJob = sequelize.define(
       allowNull: false,
     },
     status: {
-      type: DataTypes.ENUM("PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"),
+      type: DataTypes.ENUM(
+        "PENDING",
+        "DETECTING",
+        "AI_PROCESSING",
+        "VERIFYING",
+        "COMPLETED",
+        "FAILED"
+      ),
       defaultValue: "PENDING",
       allowNull: false,
     },
@@ -33,6 +40,10 @@ const AnalysisJob = sequelize.define(
     },
     completedAt: {
       type: DataTypes.DATE,
+      allowNull: true,
+    },
+    failureReason: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
   },
