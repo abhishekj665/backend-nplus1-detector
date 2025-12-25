@@ -1,5 +1,5 @@
-import {sequelize} from "./sequelizeDB.js";
-import { User, Profile, Education, IP, OTP } from "../models/index.model.js";
+import { sequelize } from "./sequelizeDB.js";
+import "../models/index.model.js";
 
 export const syncDB = async () => {
   console.log("DB sync started");

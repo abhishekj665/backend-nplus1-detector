@@ -1,49 +1,36 @@
-import { DataTypes } from "sequelize";
 import { sequelize } from "../db/sequelizeDB.js";
+import { DataTypes } from "sequelize";
 
-const IP = sequelize.define(
-  "IP",
+const DetectIssue = sequelize.define(
+  "DetectIssue",
   {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    ip: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    country: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    city: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    region: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    location: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    timezone: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    isp: {
-      type: DataTypes.STRING,
-    },
-    userId: {
+    analysisJobId: {
       type: DataTypes.UUID,
       allowNull: false,
     },
+    issueType: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    issueDescription: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    locationHint: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    detectedIssue: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-export default IP;
+export default DetectIssue;

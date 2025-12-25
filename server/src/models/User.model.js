@@ -12,6 +12,7 @@ const User = sequelize.define(
     username: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     email: {
       type: DataTypes.STRING,
@@ -22,13 +23,21 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    status: {
+      type: DataTypes.ENUM("ACTIVE", "BLOCKED", "FREEZE"),
+      defaultValue: "ACTIVE",
+    },
+    isSubscribed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
     isVerified: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
   },
   {
-    timestamps: false,
+    timestamps: true,
   }
 );
 
