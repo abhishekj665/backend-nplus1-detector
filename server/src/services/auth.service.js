@@ -65,7 +65,6 @@ export const logInService = async ({ email, password }) => {
 
   user.login_At = new Date();
 
-  console.log("USER LogIN at : ", localTime(user.login_At));
   await user.save();
 
   await OTP.destroy({ where: { email: user.email } });
@@ -79,7 +78,6 @@ export const logInService = async ({ email, password }) => {
 };
 
 export const verifyOtpService = async (email, otp, purpose) => {
-  console.log(email, otp, purpose);
   const otpData = await findOtpData(email, purpose);
 
   if (!otpData) {
