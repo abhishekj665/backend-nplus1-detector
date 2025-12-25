@@ -12,4 +12,5 @@ export const env = {
   mail_user: process.env.MAIL_USER,
   mail_pass: process.env.MAIL_PASS,
   geo_apikey: process.env.GEO_APIKEY,
+  llm_api_key: process.env.LLM_API_KEY,
 };

@@ -19,6 +19,10 @@ const OTP = sequelize.define("OTP", {
       "LOGIN"
     ),
   },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   expiresAt: {
     type: DataTypes.DATE,
     allowNull: false,

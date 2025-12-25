@@ -43,7 +43,7 @@ const Profile = sequelize.define(
     },
   },
   {
-    timestamps: false,
+    timestamps: true,
   }
 );
 

@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
-import { env } from "../config/env";
+import { env } from "../config/env.js";
 
-export default auth = (req, res, next) => {
+export const auth = (req, res, next) => {
   try {
     const token = req.cookies.token;
     if (!token) {
@@ -10,7 +10,7 @@ export default auth = (req, res, next) => {
     let debugg = jwt.verify(token, env.jwt_password);
     req.user = debugg;
     next();
-  } catch (err) {
-    return res.status(401).json({ message: "Unauthorized" });
+  } catch (error) {
+    next(error);
   }
 };
