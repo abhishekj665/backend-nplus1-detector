@@ -1,6 +1,7 @@
 # Backend Code Analysis & Optimization Platform
 
-A backend-focused system that allows authenticated users to submit source code for analysis using a **job-based architecture**.  
+A backend-focused system that allows authenticated users to submit source code for analysis using a **job-based architecture**. 
+
 The platform combines **deterministic static analysis** with **AI-assisted refactoring**, while maintaining auditability, correctness, and scalability.
 
 This project is developed as a **B.Tech Major Project** with an emphasis on backend engineering and system design rather than UI or AI prompt wrapping.
@@ -10,6 +11,7 @@ This project is developed as a **B.Tech Major Project** with an emphasis on back
 ## 📌 Problem Statement
 
 Most existing AI-based code review platforms directly send user-submitted code to an AI model and return suggestions.  
+
 This approach suffers from:
 
 - Inconsistent results
@@ -88,6 +90,7 @@ Final Results Stored
 ## 🗂️ Data Model Overview
 
 ### AnalysisJob
+
 Represents a single unit of work created when a user submits code.
 
 - Stores immutable code snapshot
@@ -95,15 +98,18 @@ Represents a single unit of work created when a user submits code.
 - Enables job polling and future async processing
 
 ### ActivityLog
+
 Acts as an audit trail for user and system actions.
 
 #### Tracks:
+
 - LOGIN / LOGOUT
 - CODE_UPLOAD
 - DETECTOR_RUN
 - AI_CALL
 
 #### Used for:
+
 - Debugging
 - Observability
 - Abuse prevention (future scope)
@@ -125,6 +131,7 @@ Acts as an audit trail for user and system actions.
 ## 🚀 Current Features
 
 ### Implemented
+
 - Secure authentication and verification
 - Job-based code submission (`POST /jobs`)
 - Persistent code storage (text-only, non-executable)
@@ -133,6 +140,7 @@ Acts as an audit trail for user and system actions.
 - Scalable database design
 
 ### Planned
+
 - Static analysis engine integration
 - Detector result storage
 - AI-assisted refactoring
@@ -197,12 +205,15 @@ Only authenticated and verified users can create analysis jobs.
 ## 👤 Author
 
 #### Abhishek Jevene
+
 **LinkedIn Profile** - https://www.linkedin.com/in/abhishek-jevene-2a3b18267/
 
 **Email** - jeveneabhi665@gmail.com
 
 ###### B.Tech – Computer Science - (AIML)
+
 ###### Backend Developer
+
 Focus: Backend architecture, APIs, system design
 
 ## 📜 License
