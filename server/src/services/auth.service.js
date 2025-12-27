@@ -6,8 +6,7 @@ import { nanoid } from "nanoid";
 import jwtSign from "../utils/jwtSign.utils.js";
 import { createOTP } from "../utils/createOTP.utils.js";
 import { findOtpData } from "../utils/findOtpData.utils.js";
-import STATUS from "../config/constants/Status.js";
-import { localTime } from "../utils/localTime.utils.js";
+
 
 export const signUpService = async ({ username, email, password }) => {
   if (!email || !password) {
@@ -31,7 +30,7 @@ export const signUpService = async ({ username, email, password }) => {
 
   const otp = generateOtp();
 
-  awaitcreateOTP(user.id, email, otp, "SIGNUP");
+  await createOTP(user.id, email, otp, "SIGNUP");
 
   return {
     success: true,
