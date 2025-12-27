@@ -46,6 +46,8 @@ export const logIn = async (req, res, next) => {
 
     setCookie(res, "token", result.token);
 
+    console.log(result.id);
+
     await activityLogsService.createActivityLogsService({
       userId: result.id,
       actionType: "LOGIN",

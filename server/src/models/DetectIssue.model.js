@@ -9,24 +9,33 @@ const DetectIssue = sequelize.define(
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
+
     analysisJobId: {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    issueType: {
+
+    issueCode: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    issueDescription: {
+
+    category: {
+      type: DataTypes.ENUM("SECURITY", "BUG", "PERFORMANCE"),
+      allowNull: false,
+    },
+
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    locationHint: {
-      type: DataTypes.STRING,
-      allowNull: false,
+
+    lineNumber: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
-    detectedIssue: {
-      type: DataTypes.STRING,
+    expiresAt: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
   },
