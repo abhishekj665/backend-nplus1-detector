@@ -1,5 +1,5 @@
 import AppError from "../utils/AppError.util.js";
-import { Profile } from "../models/index.model.js";
+import { Profile } from "../models/Associations.model.js";
 import { nanoid } from "nanoid";
 
 export const getProfileService = async (userId) => {

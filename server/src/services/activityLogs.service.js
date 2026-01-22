@@ -1,4 +1,4 @@
-import { ActivityLog } from "../models/index.model.js";
+import { ActivityLog } from "../models/Associations.model.js";
 import AppError from "../utils/AppError.util.js";
 import { nanoid } from "nanoid";
 

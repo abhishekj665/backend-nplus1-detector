@@ -1,10 +1,10 @@
 import * as authServices from "../../services/auth.service.js";
 import { successResponse, errorResponse } from "../../utils/response.utils.js";
-import { setCookie } from "../../utils/setCookie.utils.js";
+import { setCookie } from "../../services/cookie.service.js";
 import STATUS from "../../config/constants/Status.js";
 import AppError from "../../utils/AppError.util.js";
 import * as activityLogsService from "../../services/activityLogs.service.js";
-import { clearCookie } from "../../utils/clearCookie.utils.js";
+import { clearCookie } from "../../services/cookie.service.js";
 
 export const signUp = async (req, res, next) => {
   try {

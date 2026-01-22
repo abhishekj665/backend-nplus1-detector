@@ -1,5 +1,5 @@
 import { sequelize } from "./sequelizeDB.js";
-import "../models/index.model.js";
+import "../models/Associations.model.js";
 
 export const syncDB = async () => {
   console.log("DB sync started");

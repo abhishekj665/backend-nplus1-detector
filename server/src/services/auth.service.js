@@ -1,12 +1,11 @@
-import { OTP, User } from "../models/index.model.js";
-import { generateOtp } from "../utils/generateOtp.utils.js";
+import { OTP, User } from "../models/Associations.model.js";
+import { generateOtp } from "../config/otpService.js";
 import bcrypt from "bcrypt";
 import AppError from "../utils/AppError.util.js";
 import { nanoid } from "nanoid";
-import jwtSign from "../utils/jwtSign.utils.js";
-import { createOTP } from "../utils/createOTP.utils.js";
-import { findOtpData } from "../utils/findOtpData.utils.js";
-import STATUS from "../config/constants/Status.js";
+import jwtSign from "../utils/jwt.utils.js";
+import { createOTP } from "../config/otpService.js";
+import { findOtpData } from "../config/otpService.js";
 import { localTime } from "../utils/localTime.utils.js";
 
 export const signUpService = async ({ username, email, password }) => {
