@@ -31,7 +31,5 @@ export async function analyzeWithAI({ codeInput, detectedIssues }) {
     }
   );
 
-  console.log(response.headers);
-
   return JSON.parse(response.data.choices[0].message.content);
 }
