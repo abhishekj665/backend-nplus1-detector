@@ -1,9 +1,9 @@
-import { User } from "../models/index.model.js";
+import { User } from "../models/Associations.model.js";
 import AppError from "../utils/AppError.util.js";
 import { generateHash } from "../utils/generateHash.utils.js";
-import { nanoid } from "nanoid";
+
 import { getPagination } from "../utils/paginations.utils.js";
-import { UniqueConstraintError } from "sequelize";
+
 
 export const getUsersService = async (page, limit, search) => {
   try {

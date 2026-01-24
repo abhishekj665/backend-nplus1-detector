@@ -1,21 +1,30 @@
-import { OTP, User } from "../models/index.model.js";
-import { generateOtp } from "../utils/generateOtp.utils.js";
+import { OTP, User } from "../models/Associations.model.js";
+import { generateOtp } from "../config/otpService.js";
 import bcrypt from "bcrypt";
 import AppError from "../utils/AppError.util.js";
 import { nanoid } from "nanoid";
-import jwtSign from "../utils/jwtSign.utils.js";
-import { createOTP } from "../utils/createOTP.utils.js";
-import { findOtpData } from "../utils/findOtpData.utils.js";
+
+import jwtSign from "../utils/jwt.utils.js";
+import { createOTP } from "../config/otpService.js";
+import { findOtpData } from "../config/otpService.js";
+import { localTime } from "../utils/localTime.utils.js";
+
 
 
 export const signUpService = async ({ username, email, password }) => {
   if (!email || !password) {
-    throw new AppError(400, "Email and password required");
+    return {
+      success: false,
+      message: "Email and password are required",
+    };
   }
 
   const exists = await User.findOne({ where: { email } });
   if (exists) {
-    throw new AppError(409, "User already exists");
+    return {
+      success: false,
+      message: "User already exists",
+    };
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -35,6 +44,7 @@ export const signUpService = async ({ username, email, password }) => {
   return {
     success: true,
     message: "You have to Verify your account first. OTP sent to email",
+    data: user,
   };
 };
 
@@ -42,22 +52,30 @@ export const logInService = async ({ email, password }) => {
   const user = await User.findOne({ where: { email } });
 
   if (!user) {
-    throw new AppError(404, "User not found");
+    return {
+      success: false,
+      message: "User Not Found",
+    };
   }
 
-  if (!user.dataValues.isVerified) {
+  if (!user.isVerified) {
     const otp = generateOtp();
 
-    await createOTP(user.dataValues.id, email, otp, "LOGIN");
+    await createOTP(user.id, email, otp, "LOGIN");
+
     return {
-      success: true,
+      success: false,
       message: "You have to Verify your account first. OTP sent to email",
+      data: user.isVerified,
     };
   }
 
   const valid = await bcrypt.compare(password, user.password);
   if (!valid) {
-    throw new AppError(401, "Invalid credentials");
+    return {
+      success: false,
+      message: "Invalid Password",
+    };
   }
 
   const token = jwtSign(user.id);
@@ -80,16 +98,25 @@ export const verifyOtpService = async (email, otp, purpose) => {
   const otpData = await findOtpData(email, purpose);
 
   if (!otpData) {
-    throw new AppError(400, "OTP not found");
+    return {
+      success: false,
+      message: "OTP not found",
+    };
   }
 
   if (otpData.expiresAt < new Date()) {
-    throw new AppError(400, "OTP expired");
+    return {
+      success: false,
+      message: "OTP expired",
+    };
   }
 
   const valid = await bcrypt.compare(otp, otpData.otp);
   if (!valid) {
-    throw new AppError(400, "Invalid OTP");
+    return {
+      success: false,
+      message: "Invalid OTP",
+    };
   }
 
   otpData.isUsed = true;
@@ -99,6 +126,7 @@ export const verifyOtpService = async (email, otp, purpose) => {
     where: {
       email,
     },
+    
   });
 
   user.isVerified = true;
@@ -116,10 +144,13 @@ export const verifyOtpService = async (email, otp, purpose) => {
 
 export const logOutService = async (userId) => {
   try {
-    const user = await User.findOne({ where: { id: userId } });
+    const user = await User.findOne({ where: { id: userId }, raw: true });
 
     if (!user) {
-      throw new AppError(404, "User not found");
+      return {
+        success: false,
+        message: "User not found",
+      };
     }
   } catch (error) {
     throw new AppError(400, error.message);
