@@ -7,7 +7,7 @@ const Router = express.Router();
 
 Router.route("/signup").post(validate(userSchema), signUp);
 Router.route("/login").post(logIn);
-Router.route("/verify").get(verifyOtp);
+Router.route("/verify").post(verifyOtp);
 Router.route("/logout").post(auth,logOut);
 
 

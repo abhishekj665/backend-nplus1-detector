@@ -4,10 +4,13 @@ import nodemailer from "nodemailer";
 
 import { env } from "./env.js";
 
-export const createOTP = async (email, otp, purpose) => {
+export const createOTP = async (userId, email, otp, purpose) => {
   let hashedOtp = await generateHash(otp);
 
+
+
   await OTP.create({
+    userId,
     email,
     otp: hashedOtp,
     purpose: purpose,

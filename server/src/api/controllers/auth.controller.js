@@ -21,7 +21,7 @@ export const signUp = async (req, res, next) => {
 
 export const verifyOtp = async (req, res, next) => {
   try {
-    let { email, otp, purpose } = req.query;
+    let { email, otp, purpose } = req.body;
     console.log(email, otp, purpose);
     if (purpose != undefined || otp != undefined || email != undefined) {
       purpose = purpose.toUpperCase();
@@ -30,7 +30,11 @@ export const verifyOtp = async (req, res, next) => {
     }
 
     const result = await authServices.verifyOtpService(email, otp, purpose);
-    return successResponse(res, result, result.message, STATUS.ACCEPTED);
+    if (result.success) {
+      return successResponse(res, result, result.message, STATUS.ACCEPTED);
+    } else {
+      errorResponse(res, result.data, result.message, STATUS.NOT_ACCEPTABLE);
+    }
   } catch (error) {
     next(error);
   }
@@ -40,8 +44,15 @@ export const logIn = async (req, res, next) => {
   try {
     const result = await authServices.logInService(req.body);
 
+    console.log(result);
+
     if (!result.success) {
-      return errorResponse(res, result.message, STATUS.UNAUTHORIZED);
+      return errorResponse(
+        res,
+        result.data,
+        result.message,
+        STATUS.UNAUTHORIZED,
+      );
     }
 
     setCookie(res, "token", result.token);
@@ -68,7 +79,7 @@ export const logOut = (req, res, next) => {
         res,
         response,
         "User Successfully LogOut",
-        STATUS.OK
+        STATUS.OK,
       );
     } else {
       return errorResponse(res, "Something went wrong", STATUS.UNAUTHORIZED);
