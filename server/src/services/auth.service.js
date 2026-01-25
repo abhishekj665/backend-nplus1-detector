@@ -3,9 +3,12 @@ import { generateOtp } from "../config/otpService.js";
 import bcrypt from "bcrypt";
 import AppError from "../utils/AppError.util.js";
 import { nanoid } from "nanoid";
+
 import jwtSign from "../utils/jwt.utils.js";
 import { createOTP } from "../config/otpService.js";
 import { findOtpData } from "../config/otpService.js";
+
+
 
 export const signUpService = async ({ username, email, password }) => {
   if (!email || !password) {

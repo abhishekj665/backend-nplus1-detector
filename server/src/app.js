@@ -4,7 +4,12 @@ import cookieParser from "cookie-parser";
 import userRouter from "./api/routes/user.route.js";
 import profileRouter from "./api/routes/profie.route.js";
 import authRouter from "./api/routes/auth.route.js";
+
+import authRouter from "./api/routes/auth.route.js";
 import cors from "cors";
+import { analyzeWithAI } from "./core/ai/llm.core.js";
+import jobRouter from "./api/routes/analysisJob.route.js";
+
 
 const app = express();
 
@@ -24,6 +29,7 @@ app.use(cookieParser());
 app.use("/user", userRouter);
 app.use("/profile", profileRouter);
 app.use("/auth", authRouter);
+app.use("/job", jobRouter);
 
 app.use(globalErrorHandler);
 export default app;

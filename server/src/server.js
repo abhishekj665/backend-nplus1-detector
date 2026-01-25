@@ -1,8 +1,8 @@
 import app from "./app.js";
 import { connectDB } from "./db/connectDB.js";
 import { env } from "./config/env.js";
+import { cleanupExpiredDetectIssues } from "./job/detectIssueCleanUp.js";
 import { syncDB } from "./db/syncDB.js";
-
 
 const startServer = async () => {
   await connectDB();
@@ -12,5 +12,9 @@ const startServer = async () => {
     console.log(`Server is listining on port ${env.port}`);
   });
 };
+
+setInterval(() => {
+  cleanupExpiredDetectIssues();
+}, 10 * 60 * 1000);
 
 startServer();
