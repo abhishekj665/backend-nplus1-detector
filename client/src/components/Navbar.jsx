@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, IconButton, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-
+import { NavLink } from "react-router-dom";
 export default function Navbar({ open, setOpen }) {
   return (
     <AppBar
@@ -22,13 +22,17 @@ export default function Navbar({ open, setOpen }) {
         <div className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
           <button className="hover:text-black">Dashboard</button>
           <button className="hover:text-black">Analyzer</button>
-          <button className="hover:text-black">Jobs</button>
+          <button className="hover:text-black">Your Jobs</button>
           <button className="hover:text-black">Reports</button>
           <button className="hover:text-black">Docs</button>
         </div>
 
         <div className="flex items-center gap-3">
-          <Button className="normal-case text-gray-700">New Analysis</Button>
+          <Button className="normal-case text-gray-700">
+            <NavLink to="/explore" >
+              New Analysis
+            </NavLink>
+          </Button>
           <IconButton>
             <AccountCircleIcon />
           </IconButton>

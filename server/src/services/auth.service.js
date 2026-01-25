@@ -8,8 +8,6 @@ import jwtSign from "../utils/jwt.utils.js";
 import { createOTP } from "../config/otpService.js";
 import { findOtpData } from "../config/otpService.js";
 
-
-
 export const signUpService = async ({ username, email, password }) => {
   if (!email || !password) {
     return {
@@ -48,7 +46,9 @@ export const signUpService = async ({ username, email, password }) => {
 };
 
 export const logInService = async ({ email, password }) => {
-  const user = await User.findOne({ where: { email } });
+  const user = await User.findOne({
+    where: { email },
+  });
 
   if (!user) {
     return {
@@ -70,6 +70,7 @@ export const logInService = async ({ email, password }) => {
   }
 
   const valid = await bcrypt.compare(password, user.password);
+
   if (!valid) {
     return {
       success: false,
@@ -87,7 +88,14 @@ export const logInService = async ({ email, password }) => {
 
   return {
     success: true,
-    id: user.id,
+    user: {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      status: user.status,
+      isVerified: user.isVerified,
+      isSubscribed: user.isSubscribed,
+    },
     token,
     message: "Login successful",
   };
@@ -109,6 +117,8 @@ export const verifyOtpService = async (email, otp, purpose) => {
       message: "OTP expired",
     };
   }
+
+  
 
   const valid = await bcrypt.compare(otp, otpData.otp);
   if (!valid) {

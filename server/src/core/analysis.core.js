@@ -1,4 +1,4 @@
-import { AnalysisJob } from "../models/index.model.js";
+import { AnalysisJob } from "../models/Associations.model.js";
 import DetectIssue from "../models/DetectIssue.model.js";
 import { runDetector } from "./detector/detectors.core.js";
 import { analyzeWithAI } from "./ai/llm.core.js";
