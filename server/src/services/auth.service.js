@@ -7,7 +7,6 @@ import { nanoid } from "nanoid";
 import jwtSign from "../utils/jwt.utils.js";
 import { createOTP } from "../config/otpService.js";
 import { findOtpData } from "../config/otpService.js";
-import { localTime } from "../utils/localTime.utils.js";
 
 
 
@@ -126,7 +125,6 @@ export const verifyOtpService = async (email, otp, purpose) => {
     where: {
       email,
     },
-    
   });
 
   user.isVerified = true;

@@ -1,18 +1,23 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-
 import "./App.css";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/Signup";
 import Anonymous from "./pages/Anonymous";
+import WelcomePage from "./pages/WelcomePage";
 import { ToastContainer } from "react-toastify";
+import ExplorePage from "./pages/ExplorePage";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage />}>
+            <Route path="welcome" element={<WelcomePage />} />
+            <Route path="explore" element={<ExplorePage />} />
+          </Route>
+
           <Route path="/auth">
             <Route path="login" element={<LoginPage />}></Route>
             <Route path="signup" element={<SignupPage />}></Route>
