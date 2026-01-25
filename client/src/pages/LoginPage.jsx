@@ -51,6 +51,7 @@ function LoginPage() {
       console.log(res);
 
       if (res?.success) {
+        navigate("/");
         toast.success("Login successful");
       } else {
         toast.error(res?.message);
