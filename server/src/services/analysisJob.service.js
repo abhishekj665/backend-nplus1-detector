@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { AnalysisJob } from "../models/index.model.js";
+import { AnalysisJob } from "../models/Associations.model.js";
 import AppError from "../utils/AppError.util.js";
 
 export const createAnalysisJobService = async (userId, data) => {

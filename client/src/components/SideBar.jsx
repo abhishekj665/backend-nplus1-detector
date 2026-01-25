@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import BoltIcon from "@mui/icons-material/Bolt";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import InstagramIcon from "@mui/icons-material/Instagram";
+import EmailIcon from "@mui/icons-material/Email";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
 export default function Sidebar({ open, setOpen }) {
@@ -47,11 +47,8 @@ export default function Sidebar({ open, setOpen }) {
           <LinkedInIcon className="text-blue-600 hover:text-blue-700" />
         </a>
         <span className="mx-3">|</span>
-        <a
-          className="hover:underline"
-          href="https://www.instagram.com/abhishek.jawney/"
-        >
-          <InstagramIcon className="text-red-600 hover:text-red-700" />
+        <a className="hover:underline" href="mailto:jeveneabhi665@gmail.com">
+          <EmailIcon className="text-gray-600 hover:text-gray-700" />
         </a>
         <span className="mx-3">|</span>
         <a

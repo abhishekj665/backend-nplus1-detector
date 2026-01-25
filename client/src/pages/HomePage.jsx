@@ -5,14 +5,17 @@ import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function HomePage() {
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => {
+    console.log(state);
+    return state.auth;
+  });
+
   const [open, setOpen] = useState(false);
 
   console.log(user);
 
   return (
-    <div className="flex h-screen bg-gray-100 relative">
-     
+    <div className="flex h-[96vh] bg-gray-100 relative">
       {open && (
         <div
           onClick={() => setOpen(false)}
@@ -20,7 +23,6 @@ export default function HomePage() {
         />
       )}
 
-     
       <Sidebar open={open} setOpen={setOpen} />
 
       <div className="flex flex-col flex-1 overflow-hidden">

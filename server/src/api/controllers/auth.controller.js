@@ -12,7 +12,7 @@ export const signUp = async (req, res, next) => {
     if (result.success) {
       return successResponse(res, result, result.message, STATUS.ACCEPTED);
     } else {
-      return errorResponse(res, result.message, STATUS.NOT_ACCEPTABLE);
+      return errorResponse(res, null, result.message, STATUS.NOT_ACCEPTABLE);
     }
   } catch (error) {
     next(error);
@@ -30,6 +30,7 @@ export const verifyOtp = async (req, res, next) => {
     }
 
     const result = await authServices.verifyOtpService(email, otp, purpose);
+
     if (result.success) {
       return successResponse(res, result, result.message, STATUS.ACCEPTED);
     } else {
@@ -44,8 +45,6 @@ export const logIn = async (req, res, next) => {
   try {
     const result = await authServices.logInService(req.body);
 
-    console.log(result);
-
     if (!result.success) {
       return errorResponse(
         res,
@@ -57,10 +56,8 @@ export const logIn = async (req, res, next) => {
 
     setCookie(res, "token", result.token);
 
-    console.log(result.id);
-
     await activityLogsService.createActivityLogsService({
-      userId: result.id,
+      userId: result.user.id,
       actionType: "LOGIN",
       result: "SUCCESS",
       message: result.message,
@@ -91,7 +88,12 @@ export const logOut = async (req, res, next) => {
         STATUS.OK,
       );
     } else {
-      return errorResponse(res, "Something went wrong", STATUS.UNAUTHORIZED);
+      return errorResponse(
+        res,
+        null,
+        "Something went wrong",
+        STATUS.UNAUTHORIZED,
+      );
     }
   } catch (error) {
     next(error);

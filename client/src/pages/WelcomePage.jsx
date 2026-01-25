@@ -2,14 +2,32 @@ import BoltIcon from "@mui/icons-material/Bolt";
 import CodeIcon from "@mui/icons-material/Code";
 import StorageIcon from "@mui/icons-material/Storage";
 import TimelineIcon from "@mui/icons-material/Timeline";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-export default function WelcomePage() {
+export default function WelcomePage({ username }) {
+  const { user } = useSelector((state) => {
+    return state.auth;
+  });
+
+  const navigate = useNavigate();
+
+  if (user === null) {
+    setTimeout(() => {
+      navigate("/auth/login");
+      toast.error("Please login to continue");
+    }, 800);
+
+    return;
+  }
+
   return (
-    <div className="h-screen  bg-[#f8f9fb] flex items-center justify-center ">
+    <div className="h-full  bg-[#f8f9fb] flex items-center justify-center ">
       <div className="max-w-5xl w-full">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900">
-            Welcome to Opti-Core
+            Welcome to Opti-Core {username}
           </h1>
 
           <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">

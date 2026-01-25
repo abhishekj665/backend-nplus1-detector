@@ -51,7 +51,7 @@ function LoginPage() {
       console.log(res);
 
       if (res?.success) {
-        navigate("/");
+        navigate("/welcome");
         toast.success("Login successful");
       } else {
         toast.error(res?.message);
@@ -81,11 +81,18 @@ function LoginPage() {
       });
       if (response.success) {
         toast.success(response.message);
+        setFormData({ email: "", password: "" });
+        setOtp("");
+        setCredentials(true);
+        const res = await dispatch(loginUser(formData)).unwrap();
+        navigate("/welcome");
       } else {
+        console.log(response);
         toast.error(response.message);
       }
     } catch (error) {
-      toast.error(error.message);
+      
+      toast.error(error.response.data.message);
     }
   };
 

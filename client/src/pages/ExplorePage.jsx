@@ -17,11 +17,13 @@ export default function ExplorePage() {
   const handleClick = async (e) => {
     e.preventDefault();
     console.log(query);
+    setQuery("");
+    setCode("");
   };
   return (
-    <div className="min-h-screen bg-[#f8f9fb] flex flex-col">
+    <div className=" h-full bg-[#f8f9fb] flex flex-col">
       <div className="flex-1 flex flex-col items-center justify-center px-6">
-        <h1 className="text-3xl font-semibold tracking-tight text-gray-900 mb-3">
+        <h1 className="text-3xl font-semibold tracking-tight mt-5 text-gray-900 mb-3">
           Discuss your backend code with Opti-Core ?
         </h1>
 
@@ -36,6 +38,7 @@ export default function ExplorePage() {
             name="query"
             onChange={handleChange}
             placeholder="Paste your backend code or describe the issue..."
+            value={query}
             className="w-full resize-none rounded-xl border border-gray-300 bg-white p-4 pr-12 text-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
 

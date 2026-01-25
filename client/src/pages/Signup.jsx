@@ -16,6 +16,7 @@ import Hero from "../components/Hero";
 import { registerUser } from "../redux/auth/authThunk";
 import { useDispatch } from "react-redux";
 import { verify } from "../services/authService";
+import { loginUser } from "../redux/auth/authThunk";
 
 function SignupPage() {
   const [formData, setFormData] = useState({
@@ -78,6 +79,8 @@ function SignupPage() {
         setFormData({ email: "", password: "", username: "" });
         setOtp("");
         setCredentials(true);
+        const res = await dispatch(loginUser(formData)).unwrap();
+        navigate("/welcome");
       } else {
         toast.error(response.message);
       }
